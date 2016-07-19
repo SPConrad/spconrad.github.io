@@ -14,12 +14,7 @@
 img {
   vertical-align: middle;
 }
-.img-responsive {
-  display: block;
-  width: 100% \9;
-  max-width: 100%;
-  height: auto;
-}
+
 .img-rounded {
   border-radius: 6px;
 }
