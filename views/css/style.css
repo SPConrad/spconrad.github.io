@@ -39,16 +39,6 @@ form {
   will-change: transform;
 }
 
-.randomPizzaContainer.small {
-
-}
-.randomPizzaContainer.medium {
-  
-}
-.randomPizzaContainer.large {
-  
-}
-
 
 .randomPizzaContainer:after {
   content: "";
