@@ -442,17 +442,21 @@ var resizePizzas = function(size) {
     }
 
     var newSize = sizeSwitcher(size);
+   // console.log(newSize - oldSize + " " + windowWidth);
     var dx = (newSize - oldSize) * windowWidth;
-
     return dx;
   }
 
   // Iterates through pizza elements on the page and changes their widths
   function changePizzaSizes(size) {
-    for (var i = 0; i < document.querySelectorAll(".randomPizzaContainer").length; i++) {
-      var dx = determineDx(document.querySelectorAll(".randomPizzaContainer")[i], size);
-      var newwidth = (document.querySelectorAll(".randomPizzaContainer")[i].offsetWidth + dx) + 'px';
-      document.querySelectorAll(".randomPizzaContainer")[i].style.width = newwidth;
+    ///these variables do not need to be set in the for loop, this was a huge
+    ///amount of wasted time and resources 
+    var pizzaContainer = document.querySelectorAll(".randomPizzaContainer")
+    var dx = determineDx(pizzaContainer[0], size);
+    var newWidth = (pizzaContainer[0].offsetWidth + dx) + 'px';
+
+    for (var i = 0; i < pizzaContainer.length; i++) {
+      pizzaContainer[i].style.width = newWidth;
     }
   }
 
@@ -501,10 +505,19 @@ function updatePositions() {
   frame++;
   window.performance.mark("mark_start_frame");
 
+  ///none of these need to be declared and set inside the for loop
   var items = document.querySelectorAll('.mover');
+  var length = items.length;
+  var scrollTop = document.body.scrollTop / 1250;
+
+
   for (var i = 0; i < items.length; i++) {
-    var phase = Math.sin((document.body.scrollTop / 1250) + (i % 5));
-    items[i].style.left = items[i].basicLeft + 100 * phase + 'px';
+    var phase = Math.sin(scrollTop + (i % 5));
+    ///transform lets the element slide around instead of "moving" it, a 
+    ///bizzare but important difference. Removes the FSL and greatly improves
+    ///framerate 
+    items[i].style.transform = "translateX(" + (100 * phase) + 'px)';
+
   }
 
   // User Timing API to the rescue again. Seriously, it's worth learning.
@@ -520,19 +533,29 @@ function updatePositions() {
 // runs updatePositions on scroll
 window.addEventListener('scroll', updatePositions);
 
-// Generates the sliding pizzas when the page loads.
 document.addEventListener('DOMContentLoaded', function() {
-  var cols = 8;
+  var col = 0;
+  var numOfColumns = 7;
   var s = 256;
-  for (var i = 0; i < 200; i++) {
+  ///no need to have 200, no more than 30 - 40 are visible depending on browser
+  ///size, went with a few extra just in case. 
+  for (var i = 0; i < 42; i++) {
+    if ((i + 1) % numOfColumns == 0)
+    {
+      col++;
+    }
     var elem = document.createElement('img');
     elem.className = 'mover';
     elem.src = "images/pizza.png";
     elem.style.height = "100px";
     elem.style.width = "73.333px";
-    elem.basicLeft = (i % cols) * s;
-    elem.style.top = (Math.floor(i / cols) * s) + 'px';
+    ///due to transformX being used I now assign this value directly to the element, instead of 
+    ///a reference value. This allows the use of transformX rather than updating style.left 
+    ///every time the element is moved. 
+    elem.style.left = s * (i % numOfColumns) + 'px';
+    elem.style.top = (col * s) + 'px';
     document.querySelector("#movingPizzas1").appendChild(elem);
   }
   updatePositions();
 });
+
