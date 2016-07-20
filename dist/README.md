@@ -1,6 +1,7 @@
 ## Website Performance Optimization portfolio project
 
-No special installation steps required.
+Open Index.html in your web browser of choice.
+
 
 Optimzations: 
 main.js: 
@@ -20,5 +21,5 @@ pizza.html:
 index.html et all
 	compressed images
 	made js calls async where possible
-	
+
 
