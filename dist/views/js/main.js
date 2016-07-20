@@ -509,10 +509,10 @@ function updatePositions() {
   var items = document.querySelectorAll('.mover');
   var length = items.length;
   var scrollTop = document.body.scrollTop / 1250;
-
+  var phase = 0;
 
   for (var i = 0; i < items.length; i++) {
-    var phase = Math.sin(scrollTop + (i % 5));
+    phase = Math.sin(scrollTop + (i % 5));
     ///transform lets the element slide around instead of "moving" it, a 
     ///bizzare but important difference. Removes the FSL and greatly improves
     ///framerate 
