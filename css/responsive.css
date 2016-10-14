@@ -1,0 +1,74 @@
+@media screen and (max-width: 500px) {
+	.row {
+		display: flex;
+		flex-wrap: wrap;
+	}	
+	
+	/*move these up towards the top of the page*/
+	.logo-img {
+		margin-top: 0px;
+		max-width: 100%;
+	}	
+
+	/*move these up towards the top of the page*/
+	.title {
+		margin-top: 0px;
+	}	
+
+	/*looks better centered at mobile*/
+	h2 {
+		text-align: center;
+		margin-left: auto;
+		margin-right: auto;
+	}
+
+	/*take up the whole width to maintain visibility*/
+	.col-4 {		
+		width: 100%;
+		display: block;
+	}
+
+	/*formatting unnecessary at this width*/
+	.col-4:nth-of-type(n) {
+		margin-right: 0;
+		margin-left: 0;
+	}
+
+	/*center the images*/
+	.app-img {
+		margin-left: auto;
+		margin-right: auto;
+		display: block;
+	}
+	
+	/*to make this readable*/
+	p {
+		font-weight: 800;
+	}
+}
+@media screen and (min-width: 501px)  and (max-width: 700px){
+	
+	.row {
+		display: flex;
+		flex-wrap: wrap;
+	}	
+
+	/*not really sure why, but I think it looks better with this at these sizes*/
+	.main-img {
+		 padding: 10px;
+	}
+
+	/*I like these better with a larger and multi-row approach, they get too small staying on the same row*/
+	.col-4 {
+		width: 50%;
+	}
+
+	.col-4:nth-of-type(n) {
+		margin-right: 0;
+		margin-left: 0;
+	}
+	/*keep the images apart*/
+	.app-img {
+		padding: 5%;
+	}	
+}
